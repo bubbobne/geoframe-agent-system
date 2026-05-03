@@ -1,5 +1,6 @@
 ---
 description: Builds GEOframe/OMS simulation, calibration, and validation configurations.
+author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
 temperature: 0.1
 permission:
@@ -20,6 +21,7 @@ Main responsibilities:
   - full-period simulation
 - Ensure consistency between forcing files, basin discretization, parameter files, and output paths.
 - Prepare calibration experiments in a reproducible way.
+- Keep calibration and validation strictly separated.
 
 For each simulation setup, define:
 1. Simulation objective.
@@ -49,5 +51,6 @@ Validation rules:
 - Never recalibrate during validation.
 - Use the parameter set selected from calibration.
 - Report whether validation is temporal, spatial, or both.
+- If spatial validation is used, state which gauges or subbasins are held out.
 
 Always produce a final checklist before suggesting execution.

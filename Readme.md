@@ -1,177 +1,95 @@
-# GEOframe Multi-Agent Setup (OpenCode)
+# GEOframe Agent Pack
 
-This repository contains a structured **multi-agent system for hydrological modelling** using GEOframe, built on top of OpenCode.
+## Abstract
 
-The goal is to support:
+This repository contains an OpenCode agent pack for GEOframe and OMS-based hydrological modelling. It provides structured prompts for scientific workflow management, technical implementation, evaluation, and documentation.
+
+## Purpose
+
+The repository is intended to support:
 - reproducible modelling workflows
-- separation of concerns
-- automated reasoning over modelling steps
-- better scientific transparency
+- separation between scientific and technical tasks
+- explicit reasoning about modelling choices
+- hydrologically defensible results
 
----
+## Repository Scope
 
-## Project Structure
-.opencode/
-└── agents/
-├── xusers/
-│ ├── geoframe-orchestrator.md
-│ ├── geoframe-meteo-data.md
-│ ├── geoframe-simulation-builder.md
-│ ├── geoframe-evaluator.md
-│ └── geoframe-documenter.md
-│
-└── xdeveloper/
-├── code-reviewer.md
-├── java-developer.md
-├── refactor-agent.md
-└── testing-agent.md
+This is not the GEOframe source code. It contains agent prompts for users and developers working with GEOframe projects.
 
+Reference material:
+- https://geoframe.blogspot.com/
+- https://abouthydrology.blogspot.com/
+- https://github.com/geoframecomponents
 
----
+## Structure
 
-## Agent Categories
-
-### `xusers/` — Hydrological Workflow Agents
-
-These agents are designed for **end-users and hydrologists** working with GEOframe.
-
-They focus on:
-- modelling workflows
-- data preparation
-- calibration and validation
-- scientific evaluation
-
-#### Main agents:
-
-- **geoframe-orchestrator**
-  - Plans the modelling workflow
-  - Chooses components and strategy
-
-- **geoframe-meteo-data**
-  - Prepares and validates meteorological forcing
-
-- **geoframe-simulation-builder**
-  - Builds simulation, calibration, and validation setups
-
-- **geoframe-evaluator**
-  - Evaluates model performance (KGE, NSE, etc.)
-
-- **geoframe-documenter**
-  - Produces reproducible scientific documentation
-
----
-
-### `xdeveloper/` — Development Agents
-
-These agents are intended for **developers working on GEOframe or related tools**.
-
-They focus on:
-- code quality
-- architecture
-- testing
-- refactoring
-
-Typical roles include:
-- reviewing Java code
-- improving OMS/GEOframe components
-- ensuring reproducibility and maintainability
-
----
-
-##  How It Works
-
-This project follows a **multi-agent architecture**:
-
-- A primary agent (orchestrator) plans the workflow
-- Specialized subagents execute specific tasks
-- Each agent has:
-  - a defined role
-  - limited permissions
-  - a specific scope
-
-This design improves:
-- modularity
-- traceability of decisions
-- robustness of modelling workflows
-
----
-
-## Usage Example
-
-Example workflow:
+The principal prompt directories are:
 
 ```text
-@geoframe-orchestrator plan a calibration and validation workflow for the basin
+xusers/.opencode/agents/
+xdevelopers/.opencode/agents/
 ```
-Then:
 
-```
+- `xusers` contains hydrological workflow agents.
+- `xdevelopers` contains Java, OMS, testing, refactoring, and review agents.
+
+## Agent Selection
+
+Use the following agents according to task type:
+
+- `geoframe-orchestrator`: plan the workflow and delegate tasks
+- `geoframe-meteo-data`: prepare meteorological forcing data
+- `geoframe-simulation-builder`: define simulation, calibration, and validation setups
+- `geoframe-evaluator`: assess model behaviour and diagnostics
+- `geoframe-documenter`: write reproducible scientific documentation
+
+- `geoframe-xdevelopers-orchestrator`: coordinate technical developer workflows
+- `geoframe-java-developer`: implement and maintain Java components
+- `geoframe-refactor-agent`: improve structure without changing scientific meaning
+- `geoframe-code-reviewer`: review code for correctness and maintainability
+- `geoframe-test-agent`: design and write tests
+- `geoframe-build-release-agent`: support builds and releases
+- `geoframe-git-maven-agent`: handle Git and Maven release workflows when explicitly requested
+- `geoframe-oms-debugger`: diagnose OMS runtime issues
+
+## Workflow Model
+
+The primary agent should define the task, then delegate to specialist agents. Each agent has a limited scope and must not infer paths, inputs, or scientific choices without evidence.
+
+Typical sequence:
+
+```text
+@geoframe-orchestrator plan the workflow
 @geoframe-meteo-data prepare forcing data
-@geoframe-simulation-builder create calibration setup
-@geoframe-evaluator evaluate results
+@geoframe-simulation-builder define the setup
+@geoframe-evaluator assess the results
+@geoframe-documenter record assumptions and decisions
 ```
----
-## Scientific Approach
 
-This setup follows a diagnostic hydrological modelling philosophy:
+## Hydrological Criteria
 
-- Do not rely on a single metric (e.g., KGE)
-- Always evaluate:
-  - discharge
-  - snow processes
-  - water balance
-  - internal states when available
+- do not evaluate a model using a single metric such as KGE
+- verify water balance and internal consistency
+- inspect snow, ET, storage, and discharge when available
+- interpret fit scores as necessary but not sufficient evidence
 
-A good KGE does not guarantee a correct hydrological model.
+## Documentation Standard
 
----
-
-## Design Principles
-
-- Separation between modelling and development
-- Explicit workflows (no hidden steps)
-- Reproducibility first
-- Minimal assumptions
-- Critical evaluation of results
-
----
-
-## Limitations
-
-- Agents do not replace hydrological expertise
-- Results must always be critically interpreted
-- Data quality strongly affects outcomes
-
----
-
-## Future Work
-
-- Multi-objective calibration support
-- Integration with remote sensing data (e.g. snow cover)
-- Automated diagnostic evaluation
-- Hybrid spatial discretization workflows
-
----
-
-## License
-
-This project is licensed under the GNU General Public License v3.0 (GPL-3.0).
-
-You are free to use, modify, and distribute this software under the terms of the GPL-3.0 license.
-
-See the LICENSE file for the full text.
-
----
+Documentation should be written in a scientific register:
+- define the objective explicitly
+- separate facts, assumptions, and interpretation
+- state limitations and reproducibility conditions
+- explain the rationale for modelling and implementation choices
+- include relevant equations, component names, or references when useful
 
 ## Contributing
 
 Contributions are welcome, especially for:
+- clearer prompts
+- new specialist agents
+- better workflow guidance
+- stronger diagnostics and validation support
 
-- new agents
-- improved workflows
-- better evaluation metrics
-- integration with GEOframe tools
+## License
 
----
-
-
+GPL-3.0. See `LICENSE` for details.

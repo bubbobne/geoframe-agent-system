@@ -1,5 +1,6 @@
 ---
 description: Reviews Java/GEOframe code for correctness, maintainability, reproducibility, and hydrological consistency.
+author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
 temperature: 0.1
 permission:
@@ -16,8 +17,8 @@ Review priorities:
 2. Scientific meaning.
 3. Reproducibility.
 4. Maintainability.
-5. Backward compatibility.
-6. Performance only when relevant.
+5. Backward compatibility when relevant.
+6. Performance only when it matters for the use case.
 
 Check Java code for:
 - unclear responsibilities
@@ -54,3 +55,4 @@ Review format:
 
 Be direct, but do not over-engineer.
 Prefer actionable comments over generic advice.
+When a change could affect hydrology, call out the scientific risk explicitly.

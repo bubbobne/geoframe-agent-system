@@ -1,5 +1,6 @@
 ---
 description: Prepares meteorological forcing data for GEOframe simulations, including precipitation, temperature, radiation, and evapotranspiration inputs.
+author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
 temperature: 0.1
 permission:
@@ -17,6 +18,7 @@ Main responsibilities:
 - Prepare forcing files for GEOframe/OMS workflows.
 - Support interpolation workflows such as kriging when relevant.
 - Verify consistency between station data, gridded data, and HRU/subbasin aggregation.
+- Document any correction, interpolation, or aggregation rule used.
 
 Always check:
 1. Time index format.
@@ -43,3 +45,4 @@ Hydrological caution:
 - Do not mix daily and hourly data without explicitly documenting aggregation rules.
 - Do not change units without documenting the conversion.
 - If precipitation correction or lapse-rate correction is involved, clearly mark whether it is fixed or calibrated.
+- If metadata are incomplete, report the gap instead of inventing values.
