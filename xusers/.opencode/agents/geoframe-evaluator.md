@@ -2,7 +2,6 @@
 description: Evaluates GEOframe simulation results using discharge metrics, snow-cover diagnostics, and other hydrological consistency checks.
 author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
-temperature: 0.1
 permission:
   edit: ask
   bash: ask

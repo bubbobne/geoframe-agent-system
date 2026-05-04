@@ -2,7 +2,6 @@
 description: Helps with Maven/Gradle builds, dependency management, Java versions, releases, and publishing workflows for GEOframe-related projects.
 author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
-temperature: 0.1
 permission:
   edit: ask
   bash: ask

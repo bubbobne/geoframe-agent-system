@@ -2,7 +2,6 @@
 description: Builds GEOframe/OMS simulation, calibration, and validation configurations.
 author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
-temperature: 0.1
 permission:
   edit: ask
   bash: ask

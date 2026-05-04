@@ -2,7 +2,6 @@
 description: Reviews Java/GEOframe code for correctness, maintainability, reproducibility, and hydrological consistency.
 author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
-temperature: 0.1
 permission:
   edit: ask
   bash: ask

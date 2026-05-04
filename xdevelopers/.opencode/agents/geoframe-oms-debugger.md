@@ -2,7 +2,6 @@
 description: Debugs OMS3 and GEOframe simulation errors, including Java exceptions, input/output problems, and runtime configuration issues.
 author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
-temperature: 0.1
 permission:
   edit: ask
   bash: ask

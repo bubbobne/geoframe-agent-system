@@ -33,6 +33,28 @@ xdevelopers/.opencode/agents/
 - `xusers` contains hydrological workflow agents.
 - `xdevelopers` contains Java, OMS, testing, refactoring, and review agents.
 
+Agent prompts may define `model` in their front matter. For now, all agents use the current model (`gpt-5.4-mini`) unless a specific agent needs a different setting later.
+
+## Imported Skills
+
+The following MIT-licensed skill prompts from `github.com/github/awesome-copilot/tree/main/skills` are useful for this pack. Keep the source reference visible when reusing or adapting them.
+
+- `acquire-codebase-knowledge` - repo discovery and onboarding. Source: `github.com/github/awesome-copilot/tree/main/skills/acquire-codebase-knowledge`
+- `breakdown-plan` - task and workflow planning. Source: `github.com/github/awesome-copilot/tree/main/skills/breakdown-plan`
+- `create-readme` - documentation drafting. Source: `github.com/github/awesome-copilot/tree/main/skills/create-readme`
+- `create-agentsmd` - AGENTS.md authoring. Source: `github.com/github/awesome-copilot/tree/main/skills/create-agentsmd`
+
+Note: skill availability depends on the host tool/runtime. If skills are not discoverable via the `skill` tool, you can still consult the corresponding `xdevelopers/.opencode/skills/<skill-name>/SKILL.md` as reference text.
+
+Java-focused skills that fit the developer agents:
+
+- `java-docs` - Javadoc and API documentation. Source: `github.com/github/awesome-copilot/tree/main/skills/java-docs`
+- `java-junit` - JUnit 5 test design. Source: `github.com/github/awesome-copilot/tree/main/skills/java-junit`
+- `java-refactoring-extract-method` - method extraction refactoring. Source: `github.com/github/awesome-copilot/tree/main/skills/java-refactoring-extract-method`
+- `java-refactoring-remove-parameter` - parameter cleanup refactoring. Source: `github.com/github/awesome-copilot/tree/main/skills/java-refactoring-remove-parameter`
+
+Primary agents should prefer these skills when the task matches their scope.
+
 ## Agent Selection
 
 Use the following agents according to task type:

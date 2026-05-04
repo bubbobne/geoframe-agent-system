@@ -2,7 +2,6 @@
 description: Optional helper for Git workflows, Maven project maintenance, and Maven Central publication. Use only when explicitly requested.
 author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
-temperature: 0.1
 permission:
   edit: ask
   bash: ask

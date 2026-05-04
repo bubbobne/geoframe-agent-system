@@ -2,7 +2,6 @@
 description: Prepares meteorological forcing data for GEOframe simulations, including precipitation, temperature, radiation, and evapotranspiration inputs.
 author: Daniele Andreis <daniele.andreis@gmail.com>
 mode: subagent
-temperature: 0.1
 permission:
   edit: ask
   bash: ask
