@@ -74,6 +74,33 @@ Use the following agents according to task type:
 - `geoframe-git-maven-agent`: handle Git and Maven release workflows when explicitly requested
 - `geoframe-oms-debugger`: diagnose OMS runtime issues
 
+
+## Visual Overview
+
+```mermaid
+flowchart TD
+    A[GEOframe Agent Pack Repo] --> B[xusers/.opencode/agents]
+    A --> C[xdevelopers/.opencode/agents]
+
+    B --> B1[geoframe-orchestrator
+(primary workflow planner)]
+    B1 --> B2[geoframe-meteo-data]
+    B1 --> B3[geoframe-simulation-builder]
+    B1 --> B4[geoframe-evaluator]
+    B1 --> B5[geoframe-documenter]
+
+    C --> C1[geoframe-xdevelopers-orchestrator
+(optional technical coordinator)]
+    C1 --> C2[geoframe-java-developer]
+    C1 --> C3[geoframe-refactor-agent]
+    C1 --> C4[geoframe-code-reviewer]
+    C1 --> C5[geoframe-test-agent]
+    C1 --> C6[geoframe-build-release-agent]
+    C1 --> C7[geoframe-oms-debugger]
+    C1 --> C8[geoframe-git-maven-agent
+(optional, explicit request only)]
+```
+
 ## Workflow Model
 
 The primary agent should define the task, then delegate to specialist agents. Each agent has a limited scope and must not infer paths, inputs, or scientific choices without evidence.
