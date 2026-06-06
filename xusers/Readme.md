@@ -20,6 +20,7 @@ It enables:
 - reproducible hydrological modelling workflows
 - structured preparation of meteorological forcing data
 - simulation setup using GEOframe components
+- execution of OMS `.sim` workflows from Python helpers, shell consoles, or direct Java OMS commands
 - evaluation of hydrological model outputs
 - scientific documentation of assumptions and results
 
@@ -46,7 +47,7 @@ All hydrological tasks must follow an explicit workflow:
 1. Define modelling objective (orchestrator)
 2. Prepare meteorological forcing data
 3. Configure GEOframe simulation
-4. Execute simulation (via GEOframe framework)
+4. Execute simulation through Python/console/Java OMS entry points
 5. Evaluate outputs and diagnostics
 6. Iterate if inconsistencies are found
 7. Document final results
@@ -96,7 +97,23 @@ Constraints:
 
 ---
 
-### 5.4 `geoframe-evaluator`
+### 5.4 `geoframe-oms-runner`
+Execution agent for prepared GEOframe/OMS workflows.
+
+Responsibilities:
+- run already-defined `.sim` files through Python scripts, console commands, or direct Java OMS launches
+- verify runtime environment, input files, parameters, and output directories before execution
+- capture commands, logs, generated files, and runtime errors for reproducibility
+- separate Python wrapper errors, OMS configuration errors, and Java component errors
+
+Constraints:
+- must NOT change calibration/validation periods, model physics, or parameter meaning
+- must NOT evaluate hydrological performance
+- must hand code-level failures to developer-layer debugging when needed
+
+---
+
+### 5.5 `geoframe-evaluator`
 Hydrological evaluation agent.
 
 Responsibilities:
@@ -111,7 +128,7 @@ Constraints:
 
 ---
 
-### 5.5 `geoframe-documenter`
+### 5.6 `geoframe-documenter`
 Scientific documentation agent.
 
 Responsibilities:
@@ -134,7 +151,7 @@ Constraints:
 
 A GEOframe user workflow is considered complete only if:
 
-- simulation has been executed successfully
+- simulation has been executed successfully through a documented Python, console, or Java OMS command
 - outputs have been evaluated
 - water balance consistency has been verified
 - diagnostics have been reported
@@ -150,7 +167,7 @@ If evaluation detects inconsistencies:
 
 - results are sent back to `geoframe-simulation-builder`
 - model configuration is revised
-- simulation is re-executed in GEOframe
+- simulation is re-executed through `geoframe-oms-runner`
 - evaluation is repeated
 
 This loop continues until:
@@ -186,7 +203,15 @@ User-layer agents must NOT:
 
 ---
 
-## 10. Relation to Developer Layer
+## 10. Python / Console Execution Boundary
+
+Many user workflows are operational rather than software-development tasks: researchers prepare data in Python, launch OMS `.sim` files from a terminal, or call the OMS library directly from Java. The user layer may inspect and run these entry points, but only to execute an already-defined hydrological workflow and preserve reproducibility evidence.
+
+If execution fails because of Java component code, Maven dependencies, OMS annotations, classpath issues, or native libraries, the issue crosses into the developer layer. In that case, the user agent should report the evidence and route the task to developer-layer debugging instead of patching Java code itself.
+
+---
+
+## 11. Relation to Developer Layer
 
 Technical implementation tasks (e.g., Java development, OMS debugging, builds, refactoring) are handled by the `xdevelopers` agent layer and are outside the scope of this directory.
 
@@ -194,7 +219,7 @@ User agents must not perform developer-layer responsibilities.
 
 ---
 
-## 11. Design Philosophy
+## 12. Design Philosophy
 
 The xusers agent layer is designed to:
 

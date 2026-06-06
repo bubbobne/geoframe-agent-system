@@ -50,6 +50,7 @@ Developer agents must NOT:
 - decide model structure for specific basins or experiments
 - interpret simulation outputs in a hydrological context
 - design calibration or validation strategies for specific cases
+- run user workflows as routine case-study operations
 
 ---
 
@@ -72,9 +73,9 @@ They MUST NOT:
 
 ### 5.1 `geoframe-xdevelopers-orchestrator`
 
-The orchestrator is responsible for:
+The primary orchestrator is responsible for:
 - decomposing technical tasks into implementable units
-- selecting appropriate developer agents
+- selecting appropriate developer agents through explicit task allow-lists
 - ensuring integration consistency across components
 - managing debugging and release workflows
 
@@ -187,6 +188,7 @@ Developer agents must NOT:
 
 - bypass testing or review stages
 - introduce case-specific hydrological assumptions
+- execute xusers simulations except as reproducible debugging evidence
 - override xusers modelling decisions
 - skip validation of computational correctness
 
@@ -198,10 +200,11 @@ The developer layer supports the user layer by providing:
 
 - correct numerical implementations
 - stable simulation infrastructure
-- reliable execution of hydrological models
+- reliable execution infrastructure for hydrological models
 
 The developer layer does NOT:
 - define hydrological case studies
+- execute routine hydrological workflows
 - interpret hydrological outputs
 - decide model configuration for specific basins
 

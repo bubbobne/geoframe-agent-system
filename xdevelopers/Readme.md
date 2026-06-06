@@ -67,17 +67,18 @@ Developer agents operate at the level of **method implementation**, not case-spe
 - selecting which physical processes apply to a basin
 - interpreting hydrological results in a real-world context
 - calibrating models for specific catchments
+- running or evaluating case-study simulations unless the task is strictly runtime debugging evidence for developer work
 
 ---
 
 ## 5. Agent Set (Developer Layer)
 
 ### 5.1 `geoframe-xdevelopers-orchestrator`
-Coordinates technical development workflows.
+Primary coordinator for technical development workflows.
 
 Responsibilities:
 - manage implementation tasks
-- coordinate developer agents
+- coordinate developer agents through explicit task allow-lists
 - ensure consistency across software components
 - handle debugging and integration workflows
 
@@ -186,6 +187,7 @@ Developer agents must NOT:
 
 - define hydrological case studies
 - decide model structure for specific applications
+- execute user workflows as routine modelling operations
 - interpret simulation results in hydrological terms
 - bypass testing or review steps for critical changes
 

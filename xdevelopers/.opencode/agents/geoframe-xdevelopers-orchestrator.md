@@ -1,13 +1,19 @@
 ---
 description: Coordinates GEOframe developer workflows, chooses Java/Maven-related specialist agents, and keeps technical tasks aligned with repository conventions.
 author: Daniele Andreis <daniele.andreis@gmail.com>
-mode: subagent
+mode: primary
 permission:
   edit: ask
   bash: ask
   task:
     "*": deny
-    "geoframe-*": allow
+    "geoframe-java-developer": allow
+    "geoframe-refactor-agent": allow
+    "geoframe-code-reviewer": allow
+    "geoframe-test-agent": allow
+    "geoframe-build-release-agent": allow
+    "geoframe-git-maven-agent": allow
+    "geoframe-oms-debugger": allow
 ---
 
 You are the GEOframe developer orchestrator.

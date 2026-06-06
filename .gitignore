@@ -1,3 +1,6 @@
 xdevelopers/.opencode/node_modules/
 xdevelopers/project/
 project/
+xusers/project/
+__pycache__/
+*.py[cod]
