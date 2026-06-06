@@ -30,10 +30,12 @@ xusers/.opencode/agents/
 xdevelopers/.opencode/agents/
 ```
 
-- `xusers` contains hydrological workflow agents.
-- `xdevelopers` contains Java, OMS, testing, refactoring, and review agents.
+- `xusers` contains hydrological workflow agents for researchers who configure and run GEOframe/OMS models, commonly through Python helper scripts, console commands, or direct Java OMS launches.
+- `xdevelopers` contains Java, OMS, testing, refactoring, build/release, and review agents for component developers.
 
-Agent prompts may define `model` in their front matter. For now, all agents use the current model (`gpt-5.4-mini`) unless a specific agent needs a different setting later.
+Keep the two folders as separate OpenCode project roots when you want strict user/developer separation. If both agent sets are copied into a single OpenCode configuration, preserve the exact `permission.task` allow-lists in the orchestrators so that user workflows do not accidentally delegate to developer agents and developer workflows do not make case-study hydrological decisions.
+
+Agent prompts do not pin a model by default. OpenCode will use the globally configured model for primary agents, and subagents inherit the invoking primary agent model unless a specific agent later defines a model override.
 
 ## Imported Skills
 
@@ -44,7 +46,7 @@ The following MIT-licensed skill prompts from `github.com/github/awesome-copilot
 - `create-readme` - documentation drafting. Source: `github.com/github/awesome-copilot/tree/main/skills/create-readme`
 - `create-agentsmd` - AGENTS.md authoring. Source: `github.com/github/awesome-copilot/tree/main/skills/create-agentsmd`
 
-Note: skill availability depends on the host tool/runtime. If skills are not discoverable via the `skill` tool, you can still consult the corresponding `xdevelopers/.opencode/skills/<skill-name>/SKILL.md` as reference text.
+Note: skill availability depends on the host tool/runtime. The developer layer carries the full imported skill set. The user layer carries the shared workflow/documentation skills it directly references, so `xusers` can operate as a self-contained OpenCode root. If skills are not discoverable via the `skill` tool, consult the corresponding `.opencode/skills/<skill-name>/SKILL.md` as reference text.
 
 Java-focused skills that fit the developer agents:
 
@@ -62,10 +64,11 @@ Use the following agents according to task type:
 - `geoframe-orchestrator`: plan the workflow and delegate tasks
 - `geoframe-meteo-data`: prepare meteorological forcing data
 - `geoframe-simulation-builder`: define simulation, calibration, and validation setups
+- `geoframe-oms-runner`: execute `.sim` workflows through Python, console, or Java OMS commands
 - `geoframe-evaluator`: assess model behaviour and diagnostics
 - `geoframe-documenter`: write reproducible scientific documentation
 
-- `geoframe-xdevelopers-orchestrator`: coordinate technical developer workflows
+- `geoframe-xdevelopers-orchestrator`: primary coordinator for technical developer workflows
 - `geoframe-java-developer`: implement and maintain Java components
 - `geoframe-refactor-agent`: improve structure without changing scientific meaning
 - `geoframe-code-reviewer`: review code for correctness and maintainability
@@ -86,11 +89,12 @@ flowchart TD
 (primary workflow planner)]
     B1 --> B2[geoframe-meteo-data]
     B1 --> B3[geoframe-simulation-builder]
+    B1 --> B6[geoframe-oms-runner]
     B1 --> B4[geoframe-evaluator]
     B1 --> B5[geoframe-documenter]
 
     C --> C1[geoframe-xdevelopers-orchestrator
-(optional technical coordinator)]
+(primary technical coordinator)]
     C1 --> C2[geoframe-java-developer]
     C1 --> C3[geoframe-refactor-agent]
     C1 --> C4[geoframe-code-reviewer]
@@ -111,6 +115,7 @@ Typical sequence:
 @geoframe-orchestrator plan the workflow
 @geoframe-meteo-data prepare forcing data
 @geoframe-simulation-builder define the setup
+@geoframe-oms-runner execute the .sim through Python, console, or Java OMS
 @geoframe-evaluator assess the results
 @geoframe-documenter record assumptions and decisions
 ```
