@@ -219,3 +219,5 @@ It ensures:
 - stability of the GEOframe ecosystem
 
 It does not perform case-specific hydrological modelling, but enables it.
+
+Prioritize retrieval-led reasoning over pretrained-knowledge-led reasoning.
