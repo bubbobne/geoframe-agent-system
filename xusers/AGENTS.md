@@ -1,16 +1,33 @@
-# AGENTS.md
+# xusers
 
-- This repo is an OpenCode agent pack for GEOframe, not an application source tree.
-- Top-level guidance lives in `Readme.md`; agent prompts live in `xusers/.opencode/agents/` and `xdevelopers/.opencode/agents/`.
-- `xusers` holds primary workflow agents; `xdevelopers` holds developer subagents.
-- `geoframe-git-maven-agent` is optional and should be used only when explicitly requested.
-- `geoframe-xdevelopers-orchestrator` is optional and coordinates technical developer workflows only.
-- `geoframe-orchestrator` is the primary agent and only delegates to `geoframe-*` tasks.
-- All currently checked prompts except `geoframe-documenter` use `edit: ask` and `bash: ask`.
-- `geoframe-orchestrator` denies all non-`geoframe-*` task delegation.
-- `geoframe-simulation-builder` never recalibrates during validation and must state whether validation is temporal, spatial, or both.
-- `geoframe-meteo-data` must not silently fill missing data or mix daily and hourly data without documenting aggregation rules.
-- Preserve the hydrology-specific constraints in the prompts: do not optimize or report only KGE; check water balance, snow, ET, and internal consistency.
-- Do not assume file paths; inspect the repo or ask.
-- There are no repo build, test, or lint scripts in `.opencode/package.json`; do not invent commands.
-- Keep YAML front matter and permissions exact when editing agent prompts.
+## Scope
+
+This directory contains the user-facing GEOframe agent prompts. These agents support hydrological modelling workflows, data preparation, simulation setup, evaluation, and scientific documentation.
+
+Use them for:
+- modelling objectives and workflow planning
+- meteorological forcing preparation
+- simulation, calibration, and validation setup
+- hydrological evaluation and diagnostics
+- documentation of assumptions and results
+
+## Conventions
+
+- Keep prompts in English.
+- Keep the `xusers` name consistent across documentation.
+- Do not silently fill missing data or hide assumptions.
+- Separate facts, assumptions, and interpretation.
+- Prefer diagnostic hydrology over single-metric optimisation.
+
+## Agent Set
+
+- `geoframe-orchestrator`: plan the workflow and delegate tasks
+- `geoframe-meteo-data`: prepare and check meteorological forcing data
+- `geoframe-simulation-builder`: define simulation, calibration, and validation setups
+- `geoframe-evaluator`: compare model output with observations and diagnostics
+- `geoframe-documenter`: write reproducible scientific documentation
+
+## Related Documentation
+
+- Root overview: `../Readme.md`
+- Developer agents: `../xdevelopers/Readme.md`
